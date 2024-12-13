@@ -4,13 +4,16 @@ namespace App\Controllers;
 
 use App\Models\MovieModel;
 use App\Models\User\User\UserModel;
+use App\Models\UserTracking\UserTrackingModel;
 
 class UserController extends BaseController
 {
     protected $userModel;
+    protected $userTrackingModel;
     public function __construct()
     {
         $this->userModel = new UserModel();
+        $this->userTrackingModel = new UserTrackingModel();
     }
    public function UserLoginView(){
         return view("pages/userlogin");
@@ -19,8 +22,11 @@ class UserController extends BaseController
    public function UserRegisterView(){
     return view("pages/userregister");
    }
+ 
    public function createNewAccount()
     {
+        date_default_timezone_set('Asia/Kolkata');
+
         $validation = \Config\Services::validation();
         // Set validation rules
         $validation->setRules([
@@ -56,7 +62,7 @@ class UserController extends BaseController
             ]);
             log_message('info', 'the value is' . json_encode($user));
             if ($user) {
-                // Log the user information
+               
                 session()->set([
                     'isLoggedIn' => true,
                     'isAdmin' => false,
@@ -64,6 +70,14 @@ class UserController extends BaseController
                     'userID' => $user['userID'],
                     'userName' => $user['name']
                 ]);
+                 // Log the user information
+                 $trackingUserData = [
+                    'userID' => $user['userID'],
+                    'user_name' => $user['name'],
+                    'login_time' => date('Y-m-d H:i:s'), // Current date and time in IST
+                     'date' => date('Y-m-d'),
+                ];
+                $this->userTrackingModel->AddLoginTrackingTime($trackingUserData); 
                 session()->setFlashdata('success', 'New Account Created Successfully!');
             } else {
                 session()->setFlashdata('errors', 'Failed To Add User');
@@ -80,6 +94,7 @@ class UserController extends BaseController
 
     public function getLoginUser ()
     {
+        date_default_timezone_set('Asia/Kolkata');
         $validation = \Config\Services::validation();
         $validation->setRules([
             'email' => 'required|valid_email',
@@ -113,8 +128,9 @@ class UserController extends BaseController
     
         // Check if user exists and verify password
         if ($user && password_verify($password, $user['password'])) {
+            
             log_message('info', 'User  data: 3');
-    
+           
             // Set session data
             session()->set([
                 'isLoggedIn' => true,
@@ -123,6 +139,19 @@ class UserController extends BaseController
                 'userID' => $user['userID'],
                 'userName' => $user['name']
             ]);
+              // Log the session data
+              log_message('info', 'Session Data: ' . json_encode(session()->get()));
+            $trackingUserData = [
+                'userID' => $user['userID'],
+                'user_name' => $user['name'],
+                'login_time' => date('Y-m-d H:i:s'), // Current date and time in IST
+                 'date' => date('Y-m-d'),
+            ];
+            if($this->userTrackingModel->AddLoginTrackingTime($trackingUserData)){
+               log_message('info','sucess');
+            }else{
+                log_message('info','errro ncncnc');
+            }
             return redirect()->to(base_url('/'))->with('message', 'Login Successfully!');
         } else {
             log_message('debug', "Invalid login credentials for email: $email");

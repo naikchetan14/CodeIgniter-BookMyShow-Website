@@ -3,13 +3,16 @@
 namespace App\Controllers;
 
 use App\Models\MovieModel;
+use App\Models\UserTracking\UserTrackingModel;
 
 class Home extends BaseController
 {
     protected $movieModel;
+    protected $userTrackingModel;
     public function __construct()
     {
         $this->movieModel = new MovieModel();
+        $this->userTrackingModel = new UserTrackingModel();
     }
     public function index(): string
     {
@@ -33,15 +36,18 @@ class Home extends BaseController
     }
     public function logoutUser()
     {
-        log_message('info','Running');
-        if (session()->get('Roles') === 'admin') {
-            session()->remove('isLoggedIn');
-            session()->destroy();
-            return redirect()->to(base_url('admin/signin'));
-        } else if (session()->get('Roles') === 'user') {
-            session()->remove('isLoggedIn');
-            session()->destroy();
-            return redirect()->to(base_url('/signin'));
-        }
+     // Set the timezone to Indian Standard Time
+    date_default_timezone_set('Asia/Kolkata');
+    $userID = session()->get('userID');
+
+    // Update the logout time in the user_sessions table
+    if ($userID && session()->get('Roles') === 'user') {
+        $this->userTrackingModel->updateLogoutTime($userID, date('Y-m-d H:i:s')); // Current date and time in IST
+    }
+
+        session()->remove('isLoggedIn');
+        session()->destroy();
+        return redirect()->to(base_url('/'));
+
     }
 }

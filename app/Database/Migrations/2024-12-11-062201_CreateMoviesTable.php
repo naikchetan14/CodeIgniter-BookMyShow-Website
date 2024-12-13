@@ -22,6 +22,10 @@ class CreateMoviesTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '100',
             ],
+            'price' => [
+                'type' => 'INT',
+                'null' => false, // This enforces that the field cannot be null
+            ],
             'duration' => [
                 'type' => 'INT',
             ],
@@ -62,11 +66,10 @@ class CreateMoviesTable extends Migration
         $this->forge->addKey('id', true); // Primary key
         $this->forge->createTable('movies');
     }
-    
+
 
     public function down()
     {
         $this->forge->dropTable('movies'); // Drop the table
     }
 }
-

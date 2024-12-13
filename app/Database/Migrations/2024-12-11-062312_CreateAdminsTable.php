@@ -18,7 +18,6 @@ class CreateAdminsTable extends Migration
             'adminName' => [
                 'type' => 'VARCHAR',
                 'constraint' => '50',
-                'unique' => true,
             ],
             'adminEmail' => [
                 'type' => 'VARCHAR',

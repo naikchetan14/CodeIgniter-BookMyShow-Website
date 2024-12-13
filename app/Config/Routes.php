@@ -7,11 +7,12 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // Admin Login and Register Routes
-$routes->get('admin/signin', 'AdminUserController::signInView');
-$routes->get('admin/register', 'AdminUserController::registerView');
+$routes->get('/admin/signin', 'AdminUserController::signInView');
+$routes->get('/admin/register', 'AdminUserController::registerView');
 
-$routes->post('admin/create/account', 'AdminUserController::createNewAdminAccount');
-$routes->post('admin/getadmin/account', 'AdminUserController::getAdminLoginUser');
+$routes->post('/admin/create/account', 'AdminUserController::createNewAdminAccount');
+$routes->post('/admin/getadmin/account', 'AdminUserController::getAdminLoginUser');
+
 
 $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('add/movie', 'MovieController::addMovieView');
@@ -21,17 +22,24 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 
     $routes->post('movie/add', 'MovieController::addNewMovieAdmin');
     $routes->post('update/(:num)', 'MovieController::updateCurrentMovieAdmin/$1');
+    // Admin Login and Register Routes
+    $routes->get('/signin', 'AdminUserController::signInView');
+    $routes->get('/register', 'AdminUserController::registerView');
 
+    $routes->post('/create/account', 'AdminUserController::createNewAdminAccount');
+    $routes->post('/getadmin/account', 'AdminUserController::getAdminLoginUser');
+    $routes->get('track/allusers', 'AdminUserController::userTrackingView');
 });
 
 $routes->group('', ['filter' => 'UserAuth'], function ($routes) {
     $routes->get('/book/show/(:num)', 'MovieController::getBookMyShowView/$1');
     $routes->post('/bookshow', 'MovieController::bookUserShow');
-    $routes->get('/view/ticket/(:num)','UserBookingController::userTicketView/$1');
-    $routes->get('/generate-ticket/(:num)','UserBookingController::generateTicketPDF/$1');
-    $routes->get('/my/bookings','UserBookingController::getAllUserBookingView');
-
+    $routes->get('/view/ticket/(:num)', 'UserBookingController::userTicketView/$1');
+    $routes->get('/generate-ticket/(:num)', 'UserBookingController::generateTicketPDF/$1');
+    $routes->get('/my/bookings', 'UserBookingController::getAllUserBookingView');
 });
+
+
 
 
 //User Login and Register Routes
@@ -47,4 +55,6 @@ $routes->get('/movies/(:num)', 'MovieController::getMoviesDetails/$1');
 // $routes->post('/book/show/(:num)', 'MovieController::bookUserShow/$1');
 
 $routes->get('/getimg/(:segment)', 'Home::getimg/$1');
+
+// logout function for both admin and user
 $routes->post('/logout', 'Home::logoutUser');

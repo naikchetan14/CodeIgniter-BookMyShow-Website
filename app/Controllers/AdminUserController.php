@@ -3,13 +3,16 @@
 namespace App\Controllers;
 
 use App\Models\Admin\AdminUser\AdminUserModel;
+use App\Models\UserTracking\UserTrackingModel;
 
 class AdminUserController extends BaseController
 {
     protected $adminUserModel;
+    protected $userTrackingModel;
     public function __construct()
     {
         $this->adminUserModel = new AdminUserModel();
+        $this->userTrackingModel = new UserTrackingModel();
     }
     public function signInView()
     {
@@ -131,5 +134,10 @@ class AdminUserController extends BaseController
             session()->setFlashdata('errors', 'Invalid Email Or Password!');
             return redirect()->to(base_url('/admin/signin'))->with('message', 'Invalid email or password');
         }
+    }
+
+    public function userTrackingView(){
+        $userTrackingData= $this->userTrackingModel->findAll();
+        return view('pages/usertracking',['userTrackingData' => $userTrackingData]);
     }
 }

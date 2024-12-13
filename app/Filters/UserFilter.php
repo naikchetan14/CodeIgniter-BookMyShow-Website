@@ -11,14 +11,14 @@ class UserFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         // Check if the user is logged in
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/signin'); // Redirect to home page if not logged in
-        }
+        // if (!session()->get('isLoggedIn')) {
+        //     return redirect()->to('/signin'); // Redirect to home page if not logged in
+        // }
 
         // Check if the user is a normal user
-        if (session()->get('Roles') !== 'user') {
-            return redirect()->to('/admin/signin'); // Redirect to home page if not a user
-        }
+        // if (session()->get('Roles') !== 'user') {
+        //     return redirect()->to('/admin/signin'); // Redirect to home page if not a user
+        // }
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
