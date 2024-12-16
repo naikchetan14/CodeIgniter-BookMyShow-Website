@@ -27,6 +27,8 @@
     <section class="p-4 h-70    ">
         <h2 class="text-center text-white mt-2 mb-2">Booking List</h2>
         <div>
+        <?php if(count($userBookings) !==0) :?>
+
         <table class="table text-center">
                 <thead class="table-dark">
                     <tr>
@@ -62,6 +64,12 @@
            
         <?php endforeach; ?>
         </table>
+        <?php else : ?>
+            <div class="alert alert-warning text-center" role="alert">
+                <h4>No user Bookings data available.</h4>
+            </div>
+        <?php endif; ?>
+
         </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

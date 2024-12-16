@@ -6,6 +6,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\HTTP\URI;
+
 class Auth implements FilterInterface
 {
   /**
@@ -27,22 +28,30 @@ class Auth implements FilterInterface
   {
     // Get the URI object
     // Get the URI object
-    $uri = new URI($request->getUri());
+
+    // Allow access to the admin sign-in and register routes
+    
 
     // Check if the user is trying to access the admin sign-in or register routes
-  //   if ($uri->getPath() === '/admin/signin' || $uri->getPath() === '/admin/register') {
-  //     // Check if the role query parameter is present
-  //     if ($uri->getQuery('Roles') === 'admin') {
-  //         return; // Allow them to pass through without checking if they're logged in
-  //     }
-  // }
+    //   if ($uri->getPath() === '/admin/signin' || $uri->getPath() === '/admin/register') {
+    //     // Check if the role query parameter is present
+    //     if ($uri->getQuery('Roles') === 'admin') {
+    //         return; // Allow them to pass through without checking if they're logged in
+    //     }
+    // }
+
     // Check if the user is logged in
-    // if (!session()->get('isLoggedIn')) {
-    //   return redirect()->to('/admin/signin'); // Redirect to sign-in if not logged in
+    // if (session()->get('Roles') === 'admin') {
+    //   return ; // Redirect to sign-in if not logged in
+    // }else{
+    //   return redirect()->to('/admin/signin'); 
     // }
 
     // if (session()->get('Roles') !== 'admin') {
-    //   return redirect()->to('/signin'); // Redirect to user sign-in if not an admin
+    //   return redirect()->to('/admin/signin'); // Redirect to user sign-in if not an admin
+    // }
+    // if(!session()->get('isLoggedIn')){
+    //   return redirect()->to('/');
     // }
   }
 

@@ -27,6 +27,7 @@
 
     <section class="container mt-3 mb-3">
         <h4 class="text-center text-white">User Tracking Table</h4>
+        <?php if(count($userTrackingData) !==0) :?>
         <table class="table">
             <thead class="table-dark">
                 <tr>
@@ -66,6 +67,12 @@
 
                         </tbody>
         </table>
+        <?php else : ?>
+            <div class="alert alert-warning text-center" role="alert">
+                <h4>No user tracking data available.</h4>
+            </div>
+        <?php endif; ?>
+
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

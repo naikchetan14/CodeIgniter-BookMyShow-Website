@@ -29,7 +29,7 @@
     <?= $this->include('partialViews/carousel') ?>
   </header>
 
-  <section class="mt-5 mb-5">
+  <section class="" style="margin-top: 90px;">
     <h2 class="text-center text-white mb-4">Trending Movies</h2>
 
     <div class="container">
@@ -53,7 +53,7 @@
 
                 <span class="text-secondary">Cast:<?php echo $item['cast'] ?></span>
                 <span class="card-title text-secondary">Rating:<?php echo $item['rating'] ?></span>
-
+                <p class="card-title text-danger fw-bold"> Price:<?php echo $item['price'] ?> </p>
                 <h6><i class="fa-solid fa-star" style="color:gold;"></i></h6>
                 <?php if(session('Roles') === 'admin'): ?>
                 <div class="w-50 d-flex flex-row flex-wrap gap-2">

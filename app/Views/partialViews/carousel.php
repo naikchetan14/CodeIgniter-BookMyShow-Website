@@ -5,15 +5,15 @@
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-inner" style="height: 550px;">
-            <div class="carousel-item active p-2" style="height: 550px;">
-                <img src="assets/m1.jpg" class="d-block w-100 rounded" alt="Slide 1" style="height: 550px;background-size:cover;object-fit:cover;">
+        <div class="carousel-inner" style="height:800px;">
+            <div class="carousel-item active p-2" style="height: 650px;">
+                <img src="assets/m1.jpg" class="d-block w-100 rounded" alt="Slide 1" style="max-height: 100%;background-size:cover;background-blend-mode:darken;opacity:0.6">
             </div>
-            <div class="carousel-item p-2" style="height: 550px;">
-                <img src="assets/m2.png" class="d-block w-100 rounded" alt="Slide 2" style="height: 550px; background-size:cover;">
+            <div class="carousel-item p-2" style="height: 650px;">
+                <img src="assets/m2.png" class="d-block w-100 rounded" alt="Slide 2" style="max-height: 100%;aspect-ratio: 1 / 1;background-size:cover;background-blend-mode:darken;opacity:0.6">
             </div>
-            <div class="carousel-item p-2" style="height: 550px;">
-                <img src="assets/m4.jpg" class="d-block w-100 rounded" alt="Slide 3" style="height: 550px;background-size:cover;">
+            <div class="carousel-item p-2" style="height: 650px;">
+                <img src="assets/avatar.jpg" class="d-block w-100 rounded" alt="Slide 3" style="max-height: 100%;aspect-ratio: 1 / 1;background-size:cover;background-blend-mode:darken;opacity:0.6">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
